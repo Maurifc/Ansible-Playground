@@ -1,0 +1,1 @@
+cat /vagrant/setup/keys/id_lamp.pub >> /home/vagrant/.ssh/authorized_keys
