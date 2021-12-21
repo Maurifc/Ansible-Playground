@@ -1,0 +1,15 @@
+- name: Create the Portainer volume
+  docker_volume:
+    name: portainer_data
+
+- name: Run Portainer image
+  docker_container:
+    name: portainer
+    image: cr.portainer.io/portainer/portainer-ce:2.9.3
+    volumes:
+      - portainer_data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart_policy: always
+    ports:
+      - 8000:8000
+      - 9443:9443

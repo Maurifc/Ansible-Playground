@@ -1,0 +1,30 @@
+- name: Update all packages to the lastest version
+  apt:
+    update_cache: yes
+    upgrade: dist
+
+- name: Check if reboot is required
+  register: reboot_required_file
+  stat:
+    path: /var/run/reboot-required
+
+- name: Server reboot
+  reboot:
+    msg: Ansible Task - Server reboot started due to system update
+  when: reboot_required_file.stat.exists
+
+- name: Create docker group
+  group:
+    name: docker
+    state: present
+
+- name: Create sysAdmin user
+  user:
+    name: sysadmin
+    shell: /bin/bash
+    password: "{{ sysadmin_pass | password_hash('sha512') }}"
+    append: yes
+    groups:
+    - docker
+    - sudo
+    state: present
