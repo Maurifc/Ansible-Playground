@@ -18,7 +18,7 @@
     name: docker
     state: present
 
-- name: Create sysAdmin user
+- name: Create SysAdmin user
   user:
     name: sysadmin
     shell: /bin/bash
@@ -28,3 +28,18 @@
     - docker
     - sudo
     state: present
+
+
+- name: Import SysAdmin's public key
+  copy:
+    src: files/authorized_keys
+    dest: /home/sysadmin/.ssh/
+    owner: sysadmin
+    group: sysadmin
+    mode: '660'
+
+- name: Configure SSH Server
+  template:
+    src: templates/sshd_config.j2
+    dest: /etc/ssh/sshd_config
+  become: yes
