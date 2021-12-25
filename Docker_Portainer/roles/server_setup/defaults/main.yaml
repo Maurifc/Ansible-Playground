@@ -1,2 +1,2 @@
 sysadmin_pass: awesomepass
-ssh_port: 22
+ssh_port: '22'
