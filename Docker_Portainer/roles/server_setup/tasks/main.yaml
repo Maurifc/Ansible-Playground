@@ -30,13 +30,12 @@
     state: present
 
 
-- name: Import SysAdmin's public key
-  copy:
-    src: files/authorized_keys
-    dest: /home/sysadmin/.ssh/
-    owner: sysadmin
-    group: sysadmin
-    mode: '660'
+- name: Add SysAdmin's public key to 'authorized keys' File
+  authorized_key:
+    user: sysadmin
+    state: present
+    key: "{{ lookup('file', 'files/sysadmin_pub_key') }}"
+
 
 - name: Configure SSH Server
   template:
