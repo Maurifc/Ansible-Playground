@@ -1,0 +1,80 @@
+    
+- name: Install ZSH and Plugins Dependencies
+  apt:
+    name:
+      - git
+      - fonts-font-awesome
+    state: present
+  become: yes
+
+- name: Install ZSH
+  apt:
+    name: zsh
+    state: present
+  become: yes
+
+- name: Change default shell to ZSH
+  shell: chsh -s /bin/zsh {{ ansible_user_id }}
+  become: yes
+
+- name: Check if OhMyZsh is Installed
+  register: ohmyzsh_installed
+  stat:
+    path: $HOME/.oh-my-zsh
+
+- name: Download OhMyZsh Install Script
+  get_url:
+    url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+    dest: /tmp/ohmyzsh.sh
+  when: not ohmyzsh_installed.stat.exists
+  
+- name: Install OhMyZsh
+  shell: sh /tmp/ohmyzsh.sh --unattended
+  when: not ohmyzsh_installed.stat.exists
+  become: yes
+
+- name: Check if Auto Suggestions is Installed
+  stat:
+    path: $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+  register: auto_suggestions_installed
+
+- name: Clone Auto Suggestions
+  git:
+    repo: https://github.com/zsh-users/zsh-autosuggestions
+    dest: $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+  when: not auto_suggestions_installed.stat.exists
+
+- name: Check if Syntax Highlight is Installed
+  stat:
+    path: $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+  register: syntax_highlight_installed
+  
+- name: Clone Syntax Highlight
+  git:
+    repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
+    dest: $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+  when: not syntax_highlight_installed.stat.exists
+
+- name: Enable Auto Suggestions and Syntax Highlight Plugins
+  replace:
+    path: $HOME/.zshrc
+    regexp: "plugins=.*"
+    replace: "plugins=(git zsh-autosuggestions zsh-syntax-highlighting)"
+
+- name: Check if Powerlevel10K is Installed
+  stat:
+    path: $HOME/.oh-my-zsh/custom/themes/powerlevel10k
+  register: powerlevel10k_installed
+
+- name: Clone Powerlevel10K
+  git:
+    repo: https://github.com/romkatv/powerlevel10k.git
+    dest: $HOME/.oh-my-zsh/custom/themes/
+  when: not powerlevel10k_installed.stat.exists
+
+- name: Enables PowerLevel 10k
+  replace:
+    path: $HOME/.zshrc
+    regexp: ZSH_THEME=.*
+    replace: ZSH_THEME="powerlevel10k/powerlevel10k"
+  when: not powerlevel10k_installed.stat.exists
