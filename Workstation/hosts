@@ -1,0 +1,2 @@
+[workstation]
+192.168.1.114 ansible_user=teste ansible_password=123
