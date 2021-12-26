@@ -1,0 +1,8 @@
+- name: Download  Minikube Install Script
+  get_url:
+    url: https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+    dest: /tmp/minikube
+
+- name: Install Minikube
+  shell: install /tmp/minikube /usr/local/bin/minikube
+  become: yes

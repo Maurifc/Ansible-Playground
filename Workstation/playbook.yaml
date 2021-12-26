@@ -2,3 +2,8 @@
   roles:
     - virtualbox
     - ohmyzsh
+    - vagrant
+    - docker
+    - vscode
+    - chrome
+    - minikube
