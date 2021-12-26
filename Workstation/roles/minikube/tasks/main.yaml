@@ -1,8 +1,15 @@
+- name: Check if Minikube is Already Installed
+  stat:
+    path: /usr/local/bin/minikube
+  register: minikube_installed
+
 - name: Download  Minikube Install Script
   get_url:
     url: https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
     dest: /tmp/minikube
-
+  when: not minikube_installed.stat.exists
+  
 - name: Install Minikube
   shell: install /tmp/minikube /usr/local/bin/minikube
   become: yes
+  when: not minikube_installed.stat.exists
