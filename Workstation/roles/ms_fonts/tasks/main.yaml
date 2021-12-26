@@ -1,0 +1,9 @@
+- name: Install Microsoft Fonts
+  apt:
+    name: ttf-mscorefonts-installer
+    state: present
+  become: yes
+
+- name: Refresh Font Cache
+  shell: fc-cache -f -v
+    

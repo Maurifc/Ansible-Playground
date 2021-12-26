@@ -1,9 +1,11 @@
 - hosts: workstation
   roles:
-    - virtualbox
+    - tilix
     - ohmyzsh
+    - virtualbox
     - vagrant
     - docker
     - vscode
     - chrome
     - minikube
+    - ms_fonts

@@ -1,0 +1,5 @@
+- name: Install Tilix
+  apt:
+    name: tilix
+    state: present
+  become: yes
