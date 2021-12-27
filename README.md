@@ -8,3 +8,9 @@ Plus, it...:
  - Updates SOs packages
  - Creates SysAdmin user
  - Sets up iptables firewall 
+
+## Workstation
+Provision a basic Workstation with:
+- Docker, VirtualBox, Vagrant, Minikube, etc...
+- Aliases
+- Some fixes
