@@ -1,0 +1,5 @@
+- name: Add Aliases
+  blockinfile:
+    block: "{{ lookup('file', 'files/aliases.txt') }}"
+    dest: $HOME/.zshrc
+    backup: yes

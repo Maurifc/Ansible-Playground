@@ -9,3 +9,6 @@
     - chrome
     - minikube
     - ms_fonts
+    - aliases
+    - fix_cedilha
+    - fix_second_screen

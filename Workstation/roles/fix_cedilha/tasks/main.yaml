@@ -1,0 +1,6 @@
+- name: Fix Cedilla (US Keyboard)
+  blockinfile:
+    block: "{{ lookup('file', 'files/fix_cedilla.txt') }}"
+    dest: /etc/environment
+    backup: yes
+  become: yes

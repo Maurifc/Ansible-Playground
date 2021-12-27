@@ -1,0 +1,9 @@
+- name: Copy fix_second_screen.sh to ~/.script Folder
+  copy:
+    src: files/fix_second_screen.sh
+    dest: $HOME/.scripts/
+
+- name: Set Autostart To Fix Script
+  template:
+    src: templates/fix_script.desktop
+    dest: $HOME/.config/autostart/fix_script.desktop

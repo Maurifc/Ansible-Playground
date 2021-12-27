@@ -1,0 +1,19 @@
+[Desktop Entry]
+Comment[en_US]=
+Comment=
+Exec=bash /home/{{ ansible_user_id }}/.scripts/fix_second_screen.sh
+GenericName[en_US]=
+GenericName=
+Icon=
+MimeType=
+Name[en_US]=bash
+Name=bash
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=
