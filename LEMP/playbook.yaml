@@ -1,5 +1,5 @@
 - hosts: mysql
+  gather_facts: no
   roles:
     - server_setup
-    # - mysql_install
-    # - mysql_setup
+    - mysql

@@ -1,0 +1,59 @@
+# Dependencies
+- name: Install PyMySQL (Module Requirements)
+  pip:
+    name: pymysql
+    state: present
+  become: yes
+
+- name: Install MySQL
+  apt:
+    name: mysql-server
+    state: present
+    cache_valid_time: 3600
+    update_cache: yes
+  become: yes
+
+# - name: Change Root Password
+#   mysql_user:
+#     name: root
+#     password: "{{ mysql_root_password }}"
+#   become: yes
+
+# - name: Add my.cnf To Root Home
+#   template:
+#     src: templates/my.cnf.j2
+#     dest: /root/.my.cnf
+#     mode: 0600
+#   become: yes
+
+- name: Create MySQL Database
+  mysql_db:
+    name: app
+    state: present
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  become: yes
+
+- name: Remove MySQL Anonymous User
+  mysql_user:
+    name: ''
+    host: localhost
+    state: absent  
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  become: yes
+
+- name: 'Create MySQL User: app'
+  mysql_user:
+    name: app
+    host: '{{ app_server_address }}'
+    state: present
+    priv: "app.*:ALL"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  become: yes
+
+- name: Updates mysqld.cnf
+  template:
+    src: templates/mysqld.cnf
+    dest: /etc/mysql/mysql.conf.d/mysqld.cnf
+  notify: 
+    - Restart MySQL
+  become: yes

@@ -16,6 +16,14 @@
   when: reboot_required_file.stat.exists
   become: yes
 
+- name: Install Provision Dependencies
+  apt:
+    name: 
+    - iptables-persistent
+    - python3-pip
+    state: present
+  become: yes
+
 # SSH Server
 - name: Configure SSH Server
   template:
@@ -24,11 +32,6 @@
   become: yes
 
 # Firewall
-- name: Install IPTables Persistent
-  apt:
-    name: iptables-persistent
-    state: present
-  become: yes
 
 - name: Allow Established and Related connections
   iptables:
