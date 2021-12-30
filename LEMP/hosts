@@ -3,3 +3,6 @@ ansible_user=vagrant
 
 [mysql]
 10.10.10.21 ansible_private_key_file=.vagrant/machines/mysql/virtualbox/private_key
+
+[app]
+10.10.10.20 ansible_private_key_file=.vagrant/machines/app/virtualbox/private_key

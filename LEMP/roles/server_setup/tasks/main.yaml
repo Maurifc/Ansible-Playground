@@ -25,55 +25,8 @@
   become: yes
 
 # SSH Server
-- name: Configure SSH Server
+- name: Setting up SSH Server
   template:
     src: templates/sshd_config.j2
     dest: /etc/ssh/sshd_config
-  become: yes
-
-# Firewall
-
-- name: Allow Established and Related connections
-  iptables:
-    chain: INPUT
-    ctstate: ESTABLISHED,RELATED
-    jump: ACCEPT
-    comment: Allow established and related connections
-  become: yes
-
-- name: Allow Connections to Loopback Interface
-  iptables:
-    chain: INPUT
-    in_interface: lo
-    jump: ACCEPT
-    comment: Allow loopback connections
-  become: yes
-
-- name: Allow SSH
-  iptables:
-    chain: INPUT
-    protocol: tcp
-    destination_port: "{{ mysql_server_ssh_port }}"
-    jump: ACCEPT
-    comment: Allow SSH
-  become: yes
-
-- name: Allow MySQL Connections From App Server
-  iptables:
-    chain: INPUT
-    protocol: tcp
-    destination_port: '3306'
-    source: "{{ app_server_address }}"
-    jump: ACCEPT
-    comment: Allow MySQL Connections From App Server
-  become: yes
-
-- name: Set DROP Policy for INPUT
-  iptables:
-    chain: INPUT
-    policy: DROP
-  become: yes
-
-- name: Save IPTables Rules
-  shell: netfilter-persistent save
   become: yes

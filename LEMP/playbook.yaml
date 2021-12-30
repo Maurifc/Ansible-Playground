@@ -2,4 +2,11 @@
   gather_facts: no
   roles:
     - server_setup
+    - mysql_firewall
     - mysql
+
+- hosts: app
+  gather_facts: no
+  roles:
+    - server_setup
+    - app_firewall
