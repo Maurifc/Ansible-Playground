@@ -10,3 +10,4 @@
   roles:
     - server_setup
     - app_firewall
+    - nginx

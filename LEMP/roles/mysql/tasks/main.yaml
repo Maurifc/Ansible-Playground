@@ -50,7 +50,7 @@
     login_unix_socket: /var/run/mysqld/mysqld.sock
   become: yes
 
-- name: Updates mysqld.cnf
+- name: Setting up mysqld.cnf
   template:
     src: templates/mysqld.cnf
     dest: /etc/mysql/mysql.conf.d/mysqld.cnf
