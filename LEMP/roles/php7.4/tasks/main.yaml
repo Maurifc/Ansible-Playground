@@ -1,0 +1,17 @@
+- name: Install PHP 7.4
+  apt:
+    name:
+      - php7.4
+      - php7.4-fpm
+    state: present
+    install_recommends: no
+  become: yes
+
+- name: Copy index.php to Public Folder
+  copy:
+    src: files/index.php
+    dest: '{{app_root_folder}}/'
+    owner: www-data
+    group: www-data
+    mode: 0644
+  become: yes

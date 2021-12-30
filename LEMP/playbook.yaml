@@ -11,3 +11,4 @@
     - server_setup
     - app_firewall
     - nginx
+    - php7.4
