@@ -1,29 +1,3 @@
-# Firewall
-- name: Allow Established and Related connections
-  iptables:
-    chain: INPUT
-    ctstate: ESTABLISHED,RELATED
-    jump: ACCEPT
-    comment: Allow established and related connections
-  become: yes
-
-- name: Allow Connections to Loopback Interface
-  iptables:
-    chain: INPUT
-    in_interface: lo
-    jump: ACCEPT
-    comment: Allow loopback connections
-  become: yes
-
-- name: Allow SSH
-  iptables:
-    chain: INPUT
-    protocol: tcp
-    destination_port: "{{ ssh_port }}"
-    jump: ACCEPT
-    comment: Allow SSH
-  become: yes
-
 - name: Allow HTTP Port
   iptables:
     chain: INPUT
@@ -32,6 +6,8 @@
     jump: ACCEPT
     comment: Allow HTTP Port
   become: yes
+  notify:
+    - Save IPTables Rules
 
 - name: Allow HTTPS Port
   iptables:
@@ -41,13 +17,5 @@
     jump: ACCEPT
     comment: Allow HTTPS Port
   become: yes
-
-- name: Set DROP Policy for INPUT
-  iptables:
-    chain: INPUT
-    policy: DROP
-  become: yes
-
-- name: Save IPTables Rules
-  shell: netfilter-persistent save
-  become: yes
+  notify:
+    - Save IPTables Rules

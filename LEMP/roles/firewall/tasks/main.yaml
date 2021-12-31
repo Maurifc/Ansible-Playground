@@ -1,0 +1,38 @@
+- name: Allow Established and Related connections
+  iptables:
+    chain: INPUT
+    ctstate: ESTABLISHED,RELATED
+    jump: ACCEPT
+    comment: Allow established and related connections
+  become: yes
+  notify:
+    - Save IPTables Rules
+
+- name: Allow Connections to Loopback Interface
+  iptables:
+    chain: INPUT
+    in_interface: lo
+    jump: ACCEPT
+    comment: Allow loopback connections
+  become: yes
+  notify:
+    - Save IPTables Rules
+
+- name: Allow SSH
+  iptables:
+    chain: INPUT
+    protocol: tcp
+    destination_port: "{{ ssh_port }}"
+    jump: ACCEPT
+    comment: Allow SSH
+  become: yes
+  notify:
+    - Save IPTables Rules
+
+- name: Set DROP Policy for INPUT
+  iptables:
+    chain: INPUT
+    policy: DROP
+  become: yes
+  notify:
+    - Save IPTables Rules
