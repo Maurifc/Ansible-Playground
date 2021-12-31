@@ -1,3 +1,8 @@
+# App / Site domain
 app_domain: myapp.com
+
+# App Folder at App Server
 app_root_folder: /var/www/html
+
+# MySQL Host
 mysql_host: 10.10.10.21
