@@ -1,0 +1,16 @@
+- hosts: mysql
+  gather_facts: no
+  roles:
+    - server_setup
+    - firewall
+    - mysql_firewall
+    - mysql
+
+- hosts: app
+  gather_facts: no
+  roles:
+    - server_setup
+    - firewall
+    - app_firewall
+    - nginx
+    - php7.4
