@@ -3,14 +3,15 @@
     name:
       - php7.4
       - php7.4-fpm
+      - php7.4-mysql
     state: present
     install_recommends: no
   become: yes
 
-- name: Copy index.php to Public Folder
-  copy:
-    src: files/index.php
-    dest: '{{app_root_folder}}/'
+- name: Creating index.php
+  template:
+    src: files/index.php.j2
+    dest: '{{ app_root_folder }}/index.php'
     owner: www-data
     group: www-data
     mode: 0644

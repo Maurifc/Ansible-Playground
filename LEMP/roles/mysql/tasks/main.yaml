@@ -28,7 +28,7 @@
 
 - name: Create MySQL Database
   mysql_db:
-    name: app
+    name: '{{ mysql_database }}'
     state: present
     login_unix_socket: /var/run/mysqld/mysqld.sock
   become: yes
@@ -41,13 +41,14 @@
     login_unix_socket: /var/run/mysqld/mysqld.sock
   become: yes
 
-- name: 'Create MySQL User: app'
+- name: 'Create MySQL User: {{ mysql_user }}'
   mysql_user:
-    name: app
+    name: '{{ mysql_user }}'
+    password: '{{ mysql_user_password }}'
     host: '{{ app_server_address }}'
-    state: present
-    priv: "app.*:ALL"
+    priv: '{{ mysql_database }}.*:ALL'
     login_unix_socket: /var/run/mysqld/mysqld.sock
+    state: present
   become: yes
 
 - name: Setting up mysqld.cnf
