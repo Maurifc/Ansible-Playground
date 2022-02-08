@@ -18,6 +18,7 @@
   get_url:
     url: https://download.virtualbox.org/virtualbox/6.1.30/VirtualBox-6.1.30-148432-Linux_amd64.run
     dest: /tmp/virtualbox.run
+    timeout: 600
   when: not virtualbox_installed.stat.exists
 
 - name: Install VirtualBox
