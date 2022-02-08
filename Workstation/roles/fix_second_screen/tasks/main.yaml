@@ -6,4 +6,4 @@
 - name: Set Autostart To Fix Script
   template:
     src: templates/fix_script.desktop
-    dest: $HOME/.config/autostart/fix_script.desktop
+    dest: $HOME/.config/autostart-scripts/fix_script.desktop
