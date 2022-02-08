@@ -1,4 +1,7 @@
-- hosts: workstation
+- name: "Workstation Setup"
+  hosts: localhost
+  connection: local
+
   roles:
     - tilix
     - ohmyzsh
