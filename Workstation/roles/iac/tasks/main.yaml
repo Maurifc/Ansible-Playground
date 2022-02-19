@@ -1,0 +1,80 @@
+- name: Kubectl 1.23 Install
+  get_url:
+    url: https://dl.k8s.io/release/v1.23.3/bin/linux/amd64/kubectl
+    dest: /usr/local/bin/kubectl
+    owner: root
+    group: root
+    mode: 0755
+  become: true
+
+- name: Helm 3.8 Download
+  unarchive:
+    src: https://get.helm.sh/helm-v3.8.0-linux-amd64.tar.gz
+    dest: /tmp
+    remote_src: yes
+
+- name: Helm 3.8 Install
+  copy:
+    chmod: 755
+    src: /tmp/linux-amd64/helm
+    dest: /usr/local/bin/
+  become: true
+
+- name: Kubectx and Kubens repo clone
+  git:
+    repo: https://github.com/ahmetb/kubectx
+    dest: /opt/kubectx/
+  become: true
+
+- name: Kubectx Install
+  file:
+    src: /opt/kubectx/kubectx
+    dest: /usr/local/bin/kubectx
+    state: link  
+  become: true
+
+- name: Kubens Install
+  file:
+    src: /opt/kubectx/kubens
+    dest: /usr/local/bin/kubens
+    state: link
+  become: true
+
+- name: Terraform - Install gpg key
+  apt_key:
+    url: https://apt.releases.hashicorp.com/gpg
+    state: present
+  become: true
+
+- name: Terraform - Add APT Repository
+  apt_repository:
+    repo: "deb [arch=amd64] https://apt.releases.hashicorp.com {{ ansible_distribution_release | lower }} main"
+    state: present
+  become: true
+
+- name: GCloud CLI - Install gpg Key
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    state: present
+  become: true
+
+- name: GCloud CLI - Add APT Repository
+  apt_repository:
+    repo: deb https://packages.cloud.google.com/apt cloud-sdk main
+    state: present
+  become: true
+
+- name: Terraform install
+  apt:
+    name:
+    - terraform
+    update_cache: yes
+    state: latest
+  become: true
+
+- name: GCloud CLI install
+  apt:
+    name:
+    - google-cloud-sdk
+    state: latest
+  become: true

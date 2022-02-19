@@ -1,17 +1,20 @@
 - name: "Workstation Setup"
   hosts: localhost
   connection: local
+  gather_facts: no
 
   roles:
-    - tilix
-    - ohmyzsh
-    - virtualbox
-    - vagrant
-    - docker
-    - vscode
-    - chrome
-    - minikube
-    - ms_fonts
-    - aliases
-    - fix_cedilha
-    - fix_second_screen
+    # - iac # kubectl, helm, kubens, kubectx, terraform, gcloud cli
+    # - tilix
+    # - ohmyzsh
+    # - virtualbox
+    # - vagrant
+    # - docker
+    # - vscode
+    # - daily_apps
+    # - minikube
+    # - ms_fonts
+    # - aliases
+    # - fix_cedilha
+    ###
+    - remove_useless

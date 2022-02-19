@@ -1,0 +1,19 @@
+- name: Remove useless software
+  apt:
+    name:
+      - thunderbird
+      - ktorrent
+      - konversation
+    state: absent
+    purge: yes
+  become: yes
+
+- name: Clears Apt
+  apt:
+    autoclean: yes
+  become: yes
+
+- name: Remove dependencies that are no longer required
+  apt:
+    autoremove: yes
+  become: yes
