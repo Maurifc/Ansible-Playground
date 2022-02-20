@@ -4,6 +4,7 @@
       - thunderbird
       - ktorrent
       - konversation
+      - libreoffice-common
     state: absent
     purge: yes
   become: yes
