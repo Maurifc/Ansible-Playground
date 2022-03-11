@@ -14,3 +14,8 @@ Provision a basic Workstation with:
 - Docker, VirtualBox, Vagrant, Minikube, etc...
 - Aliases
 - Some fixes
+
+## Basic Commands
+```bash
+ansible-playbook playbook.yaml --ask-become-pass
+```
