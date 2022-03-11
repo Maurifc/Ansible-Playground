@@ -59,7 +59,7 @@
   replace:
     path: $HOME/.zshrc
     regexp: "plugins=.*"
-    replace: "plugins=(git zsh-autosuggestions zsh-syntax-highlighting)"
+    replace: "plugins=(git zsh-autosuggestions zsh-syntax-highlighting asdf fzf)"
 
 - name: Check if Powerlevel10K is Installed
   stat:

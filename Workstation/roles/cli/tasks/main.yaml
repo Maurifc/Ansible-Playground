@@ -1,0 +1,35 @@
+- name: ASDF - Check if ASDF is already installed
+  stat:
+    path: $HOME/.asdf
+  register: asdf_installed
+
+- name: ASDF - Install
+  git:
+    repo: https://github.com/asdf-vm/asdf.git
+    dest: $HOME/.asdf
+    version: v0.9.0
+  when: not asdf_installed.stat.exists
+
+- name: Fzf - Install Fuzzy Finder
+  apt:
+    name:
+    - fzf
+    state: latest
+  become: true
+
+- name: TLDR - Install
+  apt:
+    name:
+    - tldr
+    state: latest
+  become: true
+
+- name: TLDR - Update
+  shell: tldr --help
+
+- name: AutoRandr - Install
+  apt:
+    name:
+    - autorandr
+    state: latest
+  become: true
