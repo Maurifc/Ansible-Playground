@@ -4,18 +4,17 @@
   gather_facts: no
 
   roles:
-    # - iac # kubectl, helm, kubens, kubectx, terraform, gcloud cli
+    - iac # kubectl, helm, kubens, kubectx, terraform, gcloud cli
     - cli
-    # - tilix
-    # - ohmyzsh
-    # - virtualbox
-    # - vagrant
-    # - docker
-    # - vscode
-    # - daily_apps
-    # - minikube
-    # - ms_fonts
-    # - aliases
-    # - fix_cedilha
-    ###
+    - tilix
+    - ohmyzsh
+    - virtualbox
+    - vagrant
+    - docker
+    - vscode
+    - daily_apps
+    - minikube
+    - ms_fonts
+    - aliases
+    - fix_cedilha
     - remove_useless
