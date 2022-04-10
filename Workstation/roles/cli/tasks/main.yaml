@@ -25,7 +25,7 @@
   become: true
 
 - name: TLDR - Update
-  shell: tldr --help
+  shell: tldr --update
 
 - name: AutoRandr - Install
   apt:
