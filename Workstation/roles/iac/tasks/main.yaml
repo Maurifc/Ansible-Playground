@@ -15,9 +15,9 @@
 
 - name: Helm 3.8 Install
   copy:
-    mode: '0755'
     src: /tmp/linux-amd64/helm
     dest: /usr/local/bin/
+    mode: 0755
   become: true
 
 - name: Kubectx and Kubens repo clone
