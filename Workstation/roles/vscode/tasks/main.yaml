@@ -4,6 +4,12 @@
     state: present
   become: yes
 
+- name: VSCode - Fix Sync
+  apt:
+    name: gnome-keyring
+    state: present
+  become: yes
+
 - name: Fix PowerLevel10k icons
   copy:
     src: fonts/
