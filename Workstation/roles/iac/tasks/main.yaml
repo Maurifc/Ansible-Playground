@@ -15,7 +15,7 @@
 
 - name: Helm 3.8 Install
   copy:
-    chmod: 755
+    mode: '0755'
     src: /tmp/linux-amd64/helm
     dest: /usr/local/bin/
   become: true

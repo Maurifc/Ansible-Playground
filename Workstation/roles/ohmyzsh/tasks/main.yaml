@@ -31,7 +31,11 @@
 - name: Install OhMyZsh
   shell: sh /tmp/ohmyzsh.sh --unattended
   when: not ohmyzsh_installed.stat.exists
-  become: yes
+
+- name: Create .zshrc file
+  copy:
+    src: "{{ ansible_env.HOME }}/.oh-my-zsh/templates/zshrc.zsh-template" 
+    dest: "{{ ansible_env.HOME }}/.zshrc"
 
 - name: Check if Auto Suggestions is Installed
   stat:
@@ -69,7 +73,7 @@
 - name: Clone Powerlevel10K
   git:
     repo: https://github.com/romkatv/powerlevel10k.git
-    dest: $HOME/.oh-my-zsh/custom/themes/
+    dest: $HOME/.oh-my-zsh/custom/themes/powerlevel10k
   when: not powerlevel10k_installed.stat.exists
 
 - name: Enables PowerLevel 10k
