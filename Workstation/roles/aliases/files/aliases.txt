@@ -2,7 +2,6 @@
 
 # Kubernetes
 source <(kubectl completion zsh)
-source ~/.oh-my-zsh/kube-ps1/kube-ps1.sh
 
 # Aliases linux
 alias cc=clear
@@ -15,9 +14,6 @@ alias kd=kubectl\ describe
 alias bb="kubectl run busybox --image=busybox:1.28 --rm -it --restart=Never --command --"
 alias kx="kubectx"
 alias kn="kubens"
-
-# Alias Vagrant
-alias v=vagrant
 
 # Aliases docker
 alias dcon="docker container"
