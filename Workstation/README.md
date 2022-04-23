@@ -23,4 +23,14 @@ Run playbook
 ```bash
 ansible-playbook playbook.yaml --ask-become-pass
 ```
-##
+## To Do
+**Improvements**
+- Add check if helm is installed before download it
+- Add check if terraform is installed before download it
+- Standardize names (PROGRAM - ACTION)
+- Skip clones if folder already exists
+- Get aliases and pet config from backup
+
+**Create install task:**
+ - NVM
+
