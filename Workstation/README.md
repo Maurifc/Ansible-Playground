@@ -1,5 +1,5 @@
 # Workstation Setup
-Workstation setup for Ubuntu Like distros. Tested only on Kubuntu 21.10.
+Workstation setup for Ubuntu like distros. Tested only on Kubuntu 21.10.
 
 ## How to
 
